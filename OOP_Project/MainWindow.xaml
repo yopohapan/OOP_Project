@@ -4,36 +4,1095 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OOP_Project"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Inventory" Height="450" Width="280" WindowStartupLocation="CenterScreen">
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+        Title="Pawnshop" Height="600" Width="800" WindowStartupLocation="CenterScreen"
+        Activated="MainWindow_Activated">
+
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
+           
+        <materialDesign:DrawerHost
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            BorderThickness="2"
+            BorderBrush="{DynamicResource MaterialDesignDivider}" Height="600" Width="800" Grid.ColumnSpan="2">
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+            <materialDesign:DrawerHost.BottomDrawerContent>
+                <StackPanel
+                    x:Name="BottomDrawerStackPanel"
+                    Margin="0,0,0,0"
+                    Height="100"
+                    Orientation="Horizontal">
 
-        <Button Content="Add Transaction" Click="BtnAddTransaction_Click"
-               Grid.Column="0"
-               Grid.Row="0"
-               VerticalAlignment="Center"
-               HorizontalAlignment="Center"
-               FontSize="14" />
-        <Button Content="Inventory"
-               Grid.Column="0"
-               Grid.Row="1"
-               VerticalAlignment="Center"
-               HorizontalAlignment="Center"
-               FontSize="14"/>
-        <ListBox Name="lstTransactions"
-               Grid.Column="0"
-               Grid.Row="2"
-               VerticalAlignment="Center"
-               HorizontalAlignment="Center"
-               FontSize="14" Height="85" Width="175"/>
+                    <TextBlock
+                        Height="30"
+                        Margin="25,10,0,0"
+                        VerticalAlignment="Center"><Run Text="CHANGE RATES:"/>
+                    </TextBlock>
+
+                    <TextBox
+                        Height="50"
+                        Width="125"
+                        Margin="15,-25,0,0"
+                        materialDesign:HintAssist.Hint="10K Rate"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                        x:Name ="Rate10K"/>
+
+                    <TextBox
+                        Height="50"
+                        Width="125"
+                        Margin="15,-25,0,0"
+                        materialDesign:HintAssist.Hint="18K Rate"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        x:Name ="Rate18K"/>
+
+                    <TextBox
+                        Height="50"
+                        Width="125"
+                        Margin="15,-25,0,0"
+                        materialDesign:HintAssist.Hint="21K Rate"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                        x:Name ="Rate21K"/>
+
+                    <Button
+                        Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                        CommandParameter="{x:Static Dock.Bottom}"
+                        Style="{DynamicResource MaterialDesignFlatButton}"
+                        Margin="4"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right"
+                        Click="BtnSaveSettings_Click" Content="SAVE"/>
+
+                </StackPanel>
+
+            </materialDesign:DrawerHost.BottomDrawerContent>
+
+            <materialDesign:DrawerHost.LeftDrawerContent>
+                <StackPanel
+                    Name="LeftDrawerStackPanel"
+                    Width="800"
+                    Height="600"
+                    Margin="0,0,0,0"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal">
+                    <Grid
+                        Name="LeftDrawerGridInStackPanel">
+                    <Grid.RowDefinitions>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="75"/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition Height="25"/>
+                        </Grid.RowDefinitions>
+
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="25"/>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="200"/>
+
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="275"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            Margin="0,0,0,0"
+                            Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
+                            CommandParameter="{x:Static Dock.Top}"
+                            FontSize="14"
+                            Width="150" Height="50"
+                            Content="Add Customer"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom">
+                        </Button>
+
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="4"
+                            Margin="0,0,0,0"
+                            FontSize="24"
+                            Width="150"
+                            Height="50"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom">
+                            <Run Text="LOAN"/>
+                        </TextBlock>
+
+                        <materialDesign:PackIcon 
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Margin="0,0,0,0"
+                            Height="35"
+                            Width="35"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Kind="Account" />
+
+                        <ComboBox
+                            Grid.Row="2"
+                            Grid.Column="2"
+                            Margin="0,0,0,0"
+                            x:Name="cmbCustomer"
+                            materialDesign:HintAssist.Hint="Name"
+                            Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="14" Width="150"/>
+
+                        <ProgressBar
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            Margin="0,0,0,0"
+                            Value="100"
+                            Width="75"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"/>
+                        <ProgressBar
+                            Grid.Row="3"
+                            Grid.Column="2"
+                            Margin="0,0,0,0"
+                            Value="100"
+                            Width="200"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"/>
+                        <ProgressBar
+                            Grid.Row="3"
+                            Grid.Column="3"
+                            Margin="0,0,0,0"
+                            Value="100"
+                            Width="75"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"/>
+                        <ProgressBar
+                            Grid.Row="3"
+                            Grid.Column="4"
+                            Margin="0,0,0,0"
+                            Value="100"
+                            Width="200"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"/>
+
+                        <materialDesign:PackIcon 
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            Margin="0,0,0,0"
+                            Height="35"
+                            Width="35"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Kind="DiamondStone" />
+
+                        <ComboBox
+                            Grid.Row="3"
+                            Grid.Column="2"
+                            Margin="0,0,0,0"
+                            x:Name="cmbJewelryType"
+                            SelectionChanged="CmbJewelryType_SelectionChanged"
+                            materialDesign:HintAssist.Hint="Jewelry"
+                            Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                            FontSize="14" Width="150"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"/>
+
+                        <materialDesign:PackIcon 
+                            Grid.Row="4"
+                            Grid.Column="1"
+                            Margin="0,0,0,0"
+                            Height="35"
+                            Width="35"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Kind="StarFourPoints" />
+
+                        <ComboBox
+                            Grid.Row="4"
+                            Grid.Column="2"
+                            Margin="0,0,0,0"
+                            x:Name="cmbJewelryQuality"
+                            SelectionChanged="CmbJewelryQuality_SelectionChanged"
+                            materialDesign:HintAssist.Hint="Quality"
+                            Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                            FontSize="14" Width="150"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"/>
+
+                        <materialDesign:PackIcon 
+                            Grid.Row="5"
+                            Grid.Column="1"
+                            Margin="0,0,0,0"
+                            Height="35"
+                            Width="35"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Kind="Scale" />
+
+                        <TextBox
+                            x:Name="txtWeight"
+                            materialDesign:HintAssist.Hint="Weight"
+                            SelectionChanged="TxtWeight_SelectionChanged"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            Grid.Row="5"
+                            Grid.Column="2"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="14" Width="150"
+                            Margin="0,0,0,0"/>
+
+                        <materialDesign:PackIcon 
+                            Grid.Row="3"
+                            Grid.Column="3"
+                            Margin="0,0,0,0"
+                            Height="35"
+                            Width="35"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Kind="Percent" />
+
+                        <ComboBox 
+                            Grid.Row="3"
+                            Grid.Column="4"
+                            x:Name="cmbInterest"
+                            SelectionChanged="CmbInterest_SelectionChanged"
+                            materialDesign:HintAssist.Hint="Interest"
+                            Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                            FontSize="14" Height="40 "
+                            Margin="0,0,0,0" HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Width="150"/>
+
+                        <materialDesign:PackIcon 
+                            Grid.Row="4"
+                            Grid.Column="3"
+                            Margin="0,0,0,0"
+                            Height="35"
+                            Width="35"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Kind="Percent" />
+
+                        <ComboBox
+                            x:Name="cmbDiscount"
+                            materialDesign:HintAssist.Hint="Discount"
+                            SelectionChanged="CmbDiscount_SelectionChanged"
+                            Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                            Grid.Row="4"
+                            Grid.Column="4"   
+                            FontSize="14" Height="40"
+                            Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150"/>
+
+                        <materialDesign:PackIcon
+                            Grid.Row="5"
+                            Grid.Column="3"
+                            Margin="0,0,0,0"
+                            Height="35"
+                            Width="35"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Kind="PhilippinePeso" />
+
+                        <TextBlock 
+                            x:Name="txtPriceBlock"
+                            materialDesign:HintAssist.Hint="Price"
+                            Grid.Row="5"
+                            Grid.Column="4"
+                            FontSize="20" Width="150" Height="50"
+                            HorizontalAlignment="Center" VerticalAlignment="Center"
+                            TextDecorations="Underline"
+                            Margin="-15,30,0,0"/>
+
+                        <Label
+                            Content="                               (Type)"
+                            FontSize="14"
+                            Margin="5,0,0,-5"
+                            Height="50"
+                            Width="160"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom"
+                            Grid.Row="3"
+                            Grid.Column="2"/>
+
+                        <Label
+                            Content="                              (Karat)"
+                            FontSize="14"
+                            Margin="5,0,0,-5"
+                            Height="50"
+                            Width="160"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom"
+                            Grid.Row="4"
+                            Grid.Column="2"/>
+
+                        <Label
+                            Content="                           (grams)"
+                            FontSize="14"
+                            Margin="5,0,0,-5"
+                            Height="50"
+                            Width="160"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom"
+                            Grid.Row="5"
+                            Grid.Column="2"/>
+
+                        <Label
+                            Content="                   (Percentage)"
+                            FontSize="14"
+                            Margin="5,0,0,-5"
+                            Height="50"
+                            Width="160"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom"
+                            Grid.Row="3"
+                            Grid.Column="4"/>
+
+                        <Label
+                            Content="                   (Percentage)"
+                            FontSize="14"
+                            Margin="5,0,0,-5"
+                            Height="50"
+                            Width="160"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom"
+                            Grid.Row="4"
+                            Grid.Column="4"/>
+
+                        <StackPanel
+                            Name="LeftDrawerSubStackPanel"
+                            Grid.Row="3"
+                            Grid.Column="5"
+                            Height ="115" Width="215"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Margin="-25,0,25,0">
+                            
+                            <Label
+                                x:Name="ConditionLabel"
+                                Margin="32,0,0,8">
+                                Condition:
+                            </Label>
+                            
+                            <TextBox
+                                x:Name="txtJewelryCondition"
+                                TextChanged="TxtJewelryCondition_TextChanged"
+                                Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
+                                Margin="0,0,0,0"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Right"
+                                Height="75"
+                                Width="175"
+                                AcceptsReturn="True"
+                                TextWrapping="Wrap"
+                                materialDesign:HintAssist.Hint="Description" />
+                            
+                        </StackPanel>
+
+                        <materialDesign:PackIcon 
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top"
+                            Grid.Row="4"
+                            Grid.Column="5"
+                            Margin="-15,0,0,0"
+                            Height="35"
+                            Width="35"
+                            Kind="EventTime" />
+
+                        <TextBlock
+                            x:Name="timeCheckBlock"
+                            Text="{Binding Date, StringFormat=\{0:yyyy-MM-dd \n HH:mm:ss\}}"
+                            Height="50"
+                            Width="225"
+                            FontSize="20"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom"
+                            Grid.Row="4"
+                            Grid.Column="5"
+                            Margin="0,-30,0,30"/>
+
+                        <DatePicker
+                            x:Name="dpPromisedDate"
+                            FontSize="14" Width="100" Height="35"
+                            materialDesign:HintAssist.Hint="Pick Date"
+                            SelectedDateChanged="DpPromisedDate_SelectedDateChanged"
+                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Bottom"
+                            Grid.Row="4"
+                            Grid.Column="5"
+                            Margin="25,-10,0,10" />
+
+                        <Button
+                            x:Name="BtnAddLoanTransaction"
+                            Content="CONFIRM"
+                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                            CommandParameter="{x:Static Dock.Left}"
+                            Click="BtnAddLoanTransaction_Click"
+                            Height="50"
+                            Width="125"                  
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Grid.Row="5"
+                            Grid.Column="5"
+                            Margin="0,0,10,0"
+                            IsEnabled="False"/>
+
+                        <Button
+                            Name="LeftCancel"
+                            Click="LeftCancel_Click"
+                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                            Height="50"
+                            Width="100"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom"
+                            Grid.Row="5"
+                            Grid.Column="5"
+                            Margin="0,0,10,0"
+                            Style="{DynamicResource MaterialDesignFlatButton}" Content="CANCEL"/>
+
+                    </Grid>
+                 
+                </StackPanel>
+                
+            </materialDesign:DrawerHost.LeftDrawerContent>
+
+            <materialDesign:DrawerHost.TopDrawerContent>
+                <StackPanel
+                    Name="TopDrawerStackPanel"
+                    Width="800"
+                    Height="600"
+                    Margin="0,0,0,0"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal">
+                    <Grid
+                        Name="TopDrawerGridInStackPanel">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="100"/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition Height="25"/>
+                        </Grid.RowDefinitions>
+
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="75"/>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="75"/>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="150"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock
+                            Grid.Column="2"
+                            Grid.Row="1"
+                            VerticalAlignment="Center"
+                            FontSize="24"
+                            Margin="4">
+                            Add Customer
+                        </TextBlock>
+
+                        <TextBox Name="txtFirstName"
+                            TextChanged="TxtFirstName_TextChanged"
+                            materialDesign:HintAssist.Hint="First Name"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            Grid.Column="2"
+                            Grid.Row="2"
+                            VerticalAlignment="Center"
+                            FontSize="14"/>
+                        
+                        <TextBox Name="txtMiddleName"
+                            TextChanged="TxtMiddleName_TextChanged"
+                            materialDesign:HintAssist.Hint="Middle Name"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            Grid.Column="2"
+                            Grid.Row="3"
+                            VerticalAlignment="Center"
+                            FontSize="14"/>
+                        
+                        <TextBox Name="txtLastName"
+                            TextChanged="TxtLastName_TextChanged"
+                            materialDesign:HintAssist.Hint="Last Name"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            Grid.Column="2"
+                            Grid.Row="4"
+                            VerticalAlignment="Center"
+                            FontSize="14"/>
+                        
+                        <materialDesign:PackIcon 
+                            Grid.Row="2"
+                            Grid.Column="3"
+                            Margin="10,0,10,0"
+                            Height="35"
+                            Width="35"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Kind="LocationOn" />
+
+                        <TextBox Name="txtAddress"
+                            TextChanged="TxtAddress_TextChanged"
+                            materialDesign:HintAssist.Hint="Address"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            Grid.Column="4"
+                            Grid.Row="2"
+                            VerticalAlignment="Center"
+                            FontSize="14"/>
+                        
+                        <materialDesign:PackIcon 
+                            Grid.Row="3"
+                            Grid.Column="3"
+                            Margin="10,0,10,0"
+                            Height="35"
+                            Width="35"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Kind="MobilePhoneIphone" />
+                        
+                        <TextBox Name="txtcontactNumber"
+                            TextChanged="TxtcontactNumber_TextChanged"
+                            materialDesign:HintAssist.Hint="Contact Number"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            Grid.Column="4"
+                            Grid.Row="3"
+                            VerticalAlignment="Center"
+                            FontSize="14"/>
+                        
+                        <materialDesign:PackIcon 
+                            Grid.Row="4"
+                            Grid.Column="3"
+                            Margin="10,0,10,0"
+                            Height="35"
+                            Width="35"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Kind="Cake" />
+                        
+                        <DatePicker Name="dpBirthdate"
+                            SelectedDateChanged="DpBirthdate_SelectedDateChanged"
+                            materialDesign:HintAssist.Hint="Birthdate"
+                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                            Grid.Column="4"
+                            Grid.Row="4"
+                            VerticalAlignment="Center"
+                            FontSize="14"/>
+                        
+                        <Button Content="Save" Name="BtnSave"
+                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                            CommandParameter="{x:Static Dock.Top}"
+                            Grid.Column="5"
+                            Grid.Row="4"
+                            Width="125"
+                            VerticalAlignment="Bottom"
+                            FontSize="14" Margin="0,0,0,0" Height="36" Click="BtnSavePerson_Click"
+                            IsEnabled="False"/>
+
+                        <Button
+                            Name="TopCancel"
+                            Click="TopCancel_Click"
+                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                            CommandParameter="{x:Static Dock.Top}"
+                            Style="{DynamicResource MaterialDesignFlatButton}"
+                            Grid.Column="0"
+                            Grid.Row="4"
+                            FontSize="14" Margin="0,0,0,0"
+                            VerticalAlignment="Bottom">
+                            CANCEL
+                        </Button>
+                        
+                    </Grid>
+
+                </StackPanel>
+                
+            </materialDesign:DrawerHost.TopDrawerContent>
+
+            <materialDesign:DrawerHost.RightDrawerContent>
+                <StackPanel
+                    Name="RightDrawerStackPanel"
+                    Width="800"
+                    Height="600"
+                    Margin="0,0,0,0"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal">
+
+                    <Grid
+                        Name="RightDrawerGridInStackPanel">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="75"/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition Height="50"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="25"/>
+                            <ColumnDefinition Width="75"/>
+                            <ColumnDefinition Width="220"/>
+                            <ColumnDefinition Width="75"/>
+                            <ColumnDefinition Width="220"/>
+                            <ColumnDefinition Width="160"/>
+                            <ColumnDefinition Width="25"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button 
+                            x:Name="Details"
+                            Content="Details" 
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            HorizontalAlignment="Left" 
+                            VerticalAlignment="Center"
+                            Margin="0,0,0,0"                          
+                            Width="75" 
+                            Click="BtnCodexHook_Click"
+                            IsEnabled="False"/>
+
+                        <TextBox
+                            x:Name="Codex"
+                            TextChanged="Codex_TextChanged"
+                            materialDesign:HintAssist.Hint="8-Digit Code" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="14" Width="150"
+                            Margin="0,0,0,0"/>
+
+                        <materialDesign:PackIcon 
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Margin="0,0,0,0"
+                            Height="35"
+                            Width="35"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Kind="Account" />
+
+                        <TextBlock
+                            x:Name="payName"
+                            materialDesign:HintAssist.Hint="Actual Weight"
+                            Grid.Row="2"
+                            Grid.Column="2"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="16" Width="150"
+                            Height="50"
+                            Margin="0,30,0,0"/>
+
+                        <materialDesign:PackIcon 
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            Margin="0,0,0,0"
+                            Height="35"
+                            Width="35"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Kind="EventTime" />
+
+                        <TextBlock
+                            x:Name="payDate"
+                            materialDesign:HintAssist.Hint="Actual Weight"
+                            Grid.Row="3"
+                            Grid.Column="2"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="14" Width="150"
+                            Height="50"
+                            Margin="0,30,0,0"/>
+
+                        <materialDesign:PackIcon 
+                            Grid.Row="4"
+                            Grid.Column="1"
+                            Margin="0,0,0,0"
+                            Height="35"
+                            Width="35"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Kind="DiamondStone" />
+
+                        <TextBlock
+                            x:Name="payJewelry"
+                            materialDesign:HintAssist.Hint="Actual Weight"
+                            Grid.Row="4"
+                            Grid.Column="2"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="20" Width="150"
+                            Height="50"
+                            Margin="0,30,0,0"/>
+
+                        <materialDesign:PackIcon 
+                            Grid.Row="5"
+                            Grid.Column="1"
+                            Margin="0,0,0,0"
+                            Height="35"
+                            Width="35"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Kind="Scale" />
+
+                        <TextBlock
+                            x:Name="payWeight"
+                            materialDesign:HintAssist.Hint="Actual Weight"
+                            Grid.Row="5"
+                            Grid.Column="2"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="20" Width="150"
+                            Height="50"
+                            Margin="0,30,0,0"/>
+
+                        <TextBox
+                            x:Name="txtAmountToPay"
+                            TextChanged="TxtAmountToPay_TextChanged"
+                            materialDesign:HintAssist.Hint="Amount to Pay" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            Grid.Row="1"
+                            Grid.Column="4"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="14" Width="150"
+                            Margin="0,0,0,0"/>
+
+                        <materialDesign:PackIcon 
+                            Grid.Row="2"
+                            Grid.Column="3"
+                            Margin="0,0,0,0"
+                            Height="35"
+                            Width="35"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Kind="Percent" />
+
+                        <TextBlock
+                            x:Name="payInterest"
+                            materialDesign:HintAssist.Hint="Actual Weight"
+                            Grid.Row="2"
+                            Grid.Column="4"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="20" Width="150"
+                            Height="50"
+                            Margin="0,30,0,0"/>
+
+                        <materialDesign:PackIcon 
+                            Grid.Row="3"
+                            Grid.Column="3"
+                            Margin="0,0,0,0"
+                            Height="35"
+                            Width="35"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Kind="Percent" />
+                        
+                        <TextBlock
+                            x:Name="payDiscount"
+                            materialDesign:HintAssist.Hint="Actual Weight"
+                            Grid.Row="3"
+                            Grid.Column="4"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="20" Width="150"
+                            Height="50"
+                            Margin="0,30,0,0"/>
+
+                        <materialDesign:PackIcon 
+                            Grid.Row="4"
+                            Grid.Column="3"
+                            Margin="0,0,0,0"
+                            Height="35"
+                            Width="35"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Kind="PhilippinePeso" />
+                        
+                        <TextBlock
+                            x:Name="payBalance"
+                            materialDesign:HintAssist.Hint="Actual Weight"
+                            Grid.Row="4"
+                            Grid.Column="4"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="20" Width="150"
+                            Height="50"
+                            Margin="0,30,0,0"/>
+                        
+                        <materialDesign:PackIcon 
+                            Grid.Row="5"
+                            Grid.Column="3"
+                            Margin="0,0,0,0"
+                            Height="35"
+                            Width="35"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Kind="Payment" />
+
+                        <TextBlock
+                            x:Name="payStatus"
+                            materialDesign:HintAssist.Hint="Actual Weight"
+                            Grid.Row="5"
+                            Grid.Column="4"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="20" Width="150"
+                            Height="50"
+                            Margin="0,30,0,0"/>
+
+                        <Button
+                            x:Name="BtnPayAmount"
+                            Click="BtnPayAmount_Click"
+                            Content="Pay"
+                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                            CommandParameter="{x:Static Dock.Right}"
+                            Margin="0,0,0,0"
+                            Width="125"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Grid.Row="1"
+                            Grid.Column="5"
+                            IsEnabled="False">
+                        </Button>
+
+                        <Button
+                            Name="RightCancel"
+                            Click="RightCancel_Click"
+                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                            CommandParameter="{x:Static Dock.Right}"
+                            Margin="0,0,0,0"
+                            Width="125"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Grid.Row="5"
+                            Grid.Column="5">
+                            CANCEL
+                        </Button>
+
+                        <Label
+                            Content="________________________________________________________________ &#xA;Name"
+                            FontSize="14"
+                            Margin="30,0,0,0"
+                            Height="50"
+                            Width="185"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom"
+                            Grid.Row="2"
+                            Grid.Column="2"/>
+
+                        <Label
+                            Content="________________________________________________________________ &#xA;Date                 (mm/dd/yyy)"
+                            FontSize="14"
+                            Margin="30,0,0,0"
+                            Height="50"
+                            Width="185"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom"
+                            Grid.Row="3"
+                            Grid.Column="2"/>
+
+                        <Label
+                            Content="________________________________________________________________ &#xA;Jewelry                      (Type)"
+                            FontSize="14"
+                            Margin="30,0,0,0"
+                            Height="50"
+                            Width="185"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom"
+                            Grid.Row="4"
+                            Grid.Column="2"/>
+
+                        <Label
+                            Content="________________________________________________________________ &#xA;Weight                       (grams)"
+                            FontSize="14"
+                            Margin="30,0,0,0"
+                            Height="50"
+                            Width="185"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom"
+                            Grid.Row="5"
+                            Grid.Column="2"/>
+
+                        <Label
+                            Content="________________________________________________________________ &#xA;Interest             (percentage)"
+                            FontSize="14"
+                            Margin="30,0,0,0"
+                            Height="50"
+                            Width="185"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom"
+                            Grid.Row="2"
+                            Grid.Column="4"/>
+
+                        <Label
+                            Content="________________________________________________________________ &#xA;Discount           (percentage)"
+                            FontSize="14"
+                            Margin="30,0,0,0"
+                            Height="50"
+                            Width="185"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom"
+                            Grid.Row="3"
+                            Grid.Column="4"/>
+
+                        <Label
+                            Content="________________________________________________________________ &#xA;Balance                  (Pesos)"
+                            FontSize="14"
+                            Margin="30,0,0,0"
+                            Height="50"
+                            Width="185"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom"
+                            Grid.Row="4"
+                            Grid.Column="4"/>
+
+                        <Label
+                            Content="________________________________________________________________ &#xA;Status"
+                            FontSize="14"
+                            Margin="30,0,0,0"
+                            Height="50"
+                            Width="185"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom"
+                            Grid.Row="5"
+                            Grid.Column="4"/>
+
+                        <Label
+                            Content="                           (Pesos)"
+                            FontSize="14"
+                            Margin="30,30,0,-30"
+                            Height="50"
+                            Width="185"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom"
+                            Grid.Row="1"
+                            Grid.Column="4"/>
+
+                    </Grid>
+                                     
+                </StackPanel>
+                
+            </materialDesign:DrawerHost.RightDrawerContent>
+
+            <Grid
+                Width="800"
+                Height="600">
+
+                <Button
+                        x:Name="BtnLoanTransaction"
+                        Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
+                        CommandParameter="{x:Static Dock.Left}"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom"
+                        Margin="50,-125,0,125" 
+                        FontSize="20"
+                        Width="210" Height="50"
+                        Content="Loan Transaction" Click="BtnLoanTransaction_Click"/>
+                
+                <Button
+                        x:Name="BtnPaymentTransaction"
+                        Click="BtnPaymentTransaction_Click"
+                        Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
+                        CommandParameter="{x:Static Dock.Right}"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        Margin="0,-125,50,125" 
+                        FontSize="20"
+                        Width="220" Height="50"
+                        Content="Payment Transaction"/>
+                
+                <Button
+                        Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
+                        CommandParameter="{x:Static Dock.Bottom}"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom"
+                        Margin="50,-50,0,50" 
+                        Width="56">
+                    <materialDesign:PackIcon
+                        Kind="SettingsOutline"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        Height="28" Width="37" />
+                </Button>
+
+                <!--<Button
+                        Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        Margin="0,-50,50,50" 
+                        Width="56"
+                        Style="{DynamicResource MaterialDesignRaisedAccentButton}">
+                    <materialDesign:PackIcon
+                            Kind="HomeOutline"
+                            HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Height="28" Width="37"/>
+                </Button>-->
+
+                <TextBox 
+                    x:Name ="searchTextBox" 
+                    materialDesign:HintAssist.Hint="Search Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}"            
+                    Height="38"
+                    Width="120"
+                    Margin="20,-340,0,0" 
+                    VerticalAlignment="Center" HorizontalAlignment="Left"
+                    TextWrapping="Wrap"  
+                    TextChanged="SearchTextBox_TextChanged"/>
+
+                <Label
+                    Name="yawa"
+                    Content="Pawnshop D'Sangla"
+                    FontSize="30"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Height="100"
+                    Width="300"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Center"
+                    Margin="0,25,0,0">
+                </Label>
+
+                <ListView
+                    x:Name="lstViewGridData" HorizontalAlignment="Center" VerticalAlignment="Center" Height="250" Margin="0,-35,0,0"  Width="770" 
+                    SelectionChanged="LstViewGridData_SelectionChanged">
+                    <ListView.View>
+                        <GridView x:Name="grdViewData">
+                            <GridViewColumn
+                                Header="No." DisplayMemberBinding="{Binding UniqueCode}" Width="70"/>
+                            <GridViewColumn
+                                Header="Date" DisplayMemberBinding="{Binding HistoryDate}" Width="75"/>
+                            <GridViewColumn
+                                Header="Name" DisplayMemberBinding="{Binding PersonsFullName}" Width="145"/>
+                            <GridViewColumn
+                                Header="Jewelry" DisplayMemberBinding="{Binding ProductJewelry}" Width="80"/>
+                            <GridViewColumn
+                                Header="Quality" DisplayMemberBinding="{Binding ProductQuality}" Width="75"/>
+                            <GridViewColumn
+                                Header="Rate" DisplayMemberBinding="{Binding ProductRate}" Width="70"/>
+                            <GridViewColumn
+                                Header="Weight" DisplayMemberBinding="{Binding ProductWeight}" Width="75"/>
+                            <GridViewColumn
+                                Header="Interest" DisplayMemberBinding="{Binding ProductInterest}" Width="80"/>
+                            <GridViewColumn
+                                Header="Discount" DisplayMemberBinding="{Binding ProductDiscount}" Width="85"/>
+                            <GridViewColumn
+                                Header="Balance" DisplayMemberBinding="{Binding ProductBalance}" Width="100"/>
+                            <GridViewColumn
+                                Header="Status" DisplayMemberBinding="{Binding HistoryStatus}" Width="75"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+            </Grid>
+
+        </materialDesign:DrawerHost>
+
     </Grid>
+
 </Window>
