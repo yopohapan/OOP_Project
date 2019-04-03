@@ -48,3 +48,24 @@ C:\Users\kjmfernandez\OneDrive - addu.edu.ph\First Year\2nd Semester\Object-orie
 C:\Users\kjmfernandez\OneDrive - addu.edu.ph\First Year\2nd Semester\Object-oriented Programming\_Finals\OOP_Project\OOP_Project\obj\Debug\App.baml
 C:\Users\kjmfernandez\OneDrive - addu.edu.ph\First Year\2nd Semester\Object-oriented Programming\_Finals\OOP_Project\OOP_Project\obj\Debug\OOP_Project.csproj.CopyComplete
 C:\Users\user\OneDrive - addu.edu.ph\First Year\2nd Semester\Object-oriented Programming\_Finals\OOP_Project\OOP_Project\obj\Debug\OOP_Project.csprojAssemblyReference.cache
+C:\Users\user\Documents\GitHub\OOP_Project\OOP_Project\bin\Debug\OOP_Project.exe.config
+C:\Users\user\Documents\GitHub\OOP_Project\OOP_Project\bin\Debug\OOP_Project.exe
+C:\Users\user\Documents\GitHub\OOP_Project\OOP_Project\bin\Debug\OOP_Project.pdb
+C:\Users\user\Documents\GitHub\OOP_Project\OOP_Project\bin\Debug\MaterialDesignColors.dll
+C:\Users\user\Documents\GitHub\OOP_Project\OOP_Project\bin\Debug\MaterialDesignThemes.Wpf.dll
+C:\Users\user\Documents\GitHub\OOP_Project\OOP_Project\bin\Debug\MaterialDesignThemes.Wpf.pdb
+C:\Users\user\Documents\GitHub\OOP_Project\OOP_Project\bin\Debug\MaterialDesignThemes.Wpf.xml
+C:\Users\user\Documents\GitHub\OOP_Project\OOP_Project\obj\Debug\OOP_Project.csprojAssemblyReference.cache
+C:\Users\user\Documents\GitHub\OOP_Project\OOP_Project\obj\Debug\MainWindow.g.cs
+C:\Users\user\Documents\GitHub\OOP_Project\OOP_Project\obj\Debug\App.g.cs
+C:\Users\user\Documents\GitHub\OOP_Project\OOP_Project\obj\Debug\OOP_Project_MarkupCompile.cache
+C:\Users\user\Documents\GitHub\OOP_Project\OOP_Project\obj\Debug\OOP_Project_MarkupCompile.lref
+C:\Users\user\Documents\GitHub\OOP_Project\OOP_Project\obj\Debug\App.baml
+C:\Users\user\Documents\GitHub\OOP_Project\OOP_Project\obj\Debug\MainWindow.baml
+C:\Users\user\Documents\GitHub\OOP_Project\OOP_Project\obj\Debug\OOP_Project.g.resources
+C:\Users\user\Documents\GitHub\OOP_Project\OOP_Project\obj\Debug\OOP_Project.Properties.Resources.resources
+C:\Users\user\Documents\GitHub\OOP_Project\OOP_Project\obj\Debug\OOP_Project.csproj.GenerateResource.cache
+C:\Users\user\Documents\GitHub\OOP_Project\OOP_Project\obj\Debug\OOP_Project.csproj.CoreCompileInputs.cache
+C:\Users\user\Documents\GitHub\OOP_Project\OOP_Project\obj\Debug\OOP_Project.csproj.CopyComplete
+C:\Users\user\Documents\GitHub\OOP_Project\OOP_Project\obj\Debug\OOP_Project.exe
+C:\Users\user\Documents\GitHub\OOP_Project\OOP_Project\obj\Debug\OOP_Project.pdb
